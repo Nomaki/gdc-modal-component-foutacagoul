@@ -4,11 +4,13 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var PropTypes = require('prop-types');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 var ReactDOM__default = /*#__PURE__*/_interopDefaultLegacy(ReactDOM);
+var PropTypes__default = /*#__PURE__*/_interopDefaultLegacy(PropTypes);
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -105,22 +107,22 @@ var config = {
   disabled: false
 };
 
-var timeoutsShape = process.env.NODE_ENV !== 'production' ? undefined([undefined, undefined({
-  enter: undefined,
-  exit: undefined,
-  appear: undefined
+var timeoutsShape = process.env.NODE_ENV !== 'production' ? PropTypes__default["default"].oneOfType([PropTypes__default["default"].number, PropTypes__default["default"].shape({
+  enter: PropTypes__default["default"].number,
+  exit: PropTypes__default["default"].number,
+  appear: PropTypes__default["default"].number
 }).isRequired]) : null;
-var classNamesShape = process.env.NODE_ENV !== 'production' ? undefined([undefined, undefined({
-  enter: undefined,
-  exit: undefined,
-  active: undefined
-}), undefined({
-  enter: undefined,
-  enterDone: undefined,
-  enterActive: undefined,
-  exit: undefined,
-  exitDone: undefined,
-  exitActive: undefined
+var classNamesShape = process.env.NODE_ENV !== 'production' ? PropTypes__default["default"].oneOfType([PropTypes__default["default"].string, PropTypes__default["default"].shape({
+  enter: PropTypes__default["default"].string,
+  exit: PropTypes__default["default"].string,
+  active: PropTypes__default["default"].string
+}), PropTypes__default["default"].shape({
+  enter: PropTypes__default["default"].string,
+  enterDone: PropTypes__default["default"].string,
+  enterActive: PropTypes__default["default"].string,
+  exit: PropTypes__default["default"].string,
+  exitDone: PropTypes__default["default"].string,
+  exitActive: PropTypes__default["default"].string
 })]) : null;
 
 var TransitionGroupContext = React__default["default"].createContext(null);
@@ -535,10 +537,10 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *     (see
    *     [test/CSSTransition-test.js](https://github.com/reactjs/react-transition-group/blob/13435f897b3ab71f6e19d724f145596f5910581c/test/CSSTransition-test.js#L362-L437)).
    */
-  nodeRef: undefined({
-    current: typeof Element === 'undefined' ? undefined : function (propValue, key, componentName, location, propFullName, secret) {
+  nodeRef: PropTypes__default["default"].shape({
+    current: typeof Element === 'undefined' ? PropTypes__default["default"].any : function (propValue, key, componentName, location, propFullName, secret) {
       var value = propValue[key];
-      return undefined(value && 'ownerDocument' in value ? value.ownerDocument.defaultView.Element : Element)(propValue, key, componentName, location, propFullName, secret);
+      return PropTypes__default["default"].instanceOf(value && 'ownerDocument' in value ? value.ownerDocument.defaultView.Element : Element)(propValue, key, componentName, location, propFullName, secret);
     }
   }),
 
@@ -556,12 +558,12 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    * </Transition>
    * ```
    */
-  children: undefined([undefined, undefined]).isRequired,
+  children: PropTypes__default["default"].oneOfType([PropTypes__default["default"].func.isRequired, PropTypes__default["default"].element.isRequired]).isRequired,
 
   /**
    * Show the component; triggers the enter or exit states
    */
-  in: undefined,
+  in: PropTypes__default["default"].bool,
 
   /**
    * By default the child component is mounted immediately along with
@@ -569,13 +571,13 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    * first `in={true}` you can set `mountOnEnter`. After the first enter transition the component will stay
    * mounted, even on "exited", unless you also specify `unmountOnExit`.
    */
-  mountOnEnter: undefined,
+  mountOnEnter: PropTypes__default["default"].bool,
 
   /**
    * By default the child component stays mounted after it reaches the `'exited'` state.
    * Set `unmountOnExit` if you'd prefer to unmount the component after it finishes exiting.
    */
-  unmountOnExit: undefined,
+  unmountOnExit: PropTypes__default["default"].bool,
 
   /**
    * By default the child component does not perform the enter transition when
@@ -588,17 +590,17 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    * > additional `.appear-*` classes, that way you can choose to style it
    * > differently.
    */
-  appear: undefined,
+  appear: PropTypes__default["default"].bool,
 
   /**
    * Enable or disable enter transitions.
    */
-  enter: undefined,
+  enter: PropTypes__default["default"].bool,
 
   /**
    * Enable or disable exit transitions.
    */
-  exit: undefined,
+  exit: PropTypes__default["default"].bool,
 
   /**
    * The duration of the transition, in milliseconds.
@@ -651,7 +653,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    * }}
    * ```
    */
-  addEndListener: undefined,
+  addEndListener: PropTypes__default["default"].func,
 
   /**
    * Callback fired before the "entering" status is applied. An extra parameter
@@ -661,7 +663,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement, isAppearing: bool) -> void
    */
-  onEnter: undefined,
+  onEnter: PropTypes__default["default"].func,
 
   /**
    * Callback fired after the "entering" status is applied. An extra parameter
@@ -671,7 +673,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement, isAppearing: bool)
    */
-  onEntering: undefined,
+  onEntering: PropTypes__default["default"].func,
 
   /**
    * Callback fired after the "entered" status is applied. An extra parameter
@@ -681,7 +683,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement, isAppearing: bool) -> void
    */
-  onEntered: undefined,
+  onEntered: PropTypes__default["default"].func,
 
   /**
    * Callback fired before the "exiting" status is applied.
@@ -690,7 +692,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement) -> void
    */
-  onExit: undefined,
+  onExit: PropTypes__default["default"].func,
 
   /**
    * Callback fired after the "exiting" status is applied.
@@ -699,7 +701,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement) -> void
    */
-  onExiting: undefined,
+  onExiting: PropTypes__default["default"].func,
 
   /**
    * Callback fired after the "exited" status is applied.
@@ -708,7 +710,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement) -> void
    */
-  onExited: undefined
+  onExited: PropTypes__default["default"].func
 } : {}; // Name the function so it is clearer in the documentation
 
 function noop() {}
@@ -1084,7 +1086,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement, isAppearing: bool)
    */
-  onEnter: undefined,
+  onEnter: PropTypes__default["default"].func,
 
   /**
    * A `<Transition>` callback fired immediately after the 'enter-active' or
@@ -1094,7 +1096,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement, isAppearing: bool)
    */
-  onEntering: undefined,
+  onEntering: PropTypes__default["default"].func,
 
   /**
    * A `<Transition>` callback fired immediately after the 'enter' or
@@ -1104,7 +1106,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement, isAppearing: bool)
    */
-  onEntered: undefined,
+  onEntered: PropTypes__default["default"].func,
 
   /**
    * A `<Transition>` callback fired immediately after the 'exit' class is
@@ -1114,7 +1116,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement)
    */
-  onExit: undefined,
+  onExit: PropTypes__default["default"].func,
 
   /**
    * A `<Transition>` callback fired immediately after the 'exit-active' is applied.
@@ -1123,7 +1125,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement)
    */
-  onExiting: undefined,
+  onExiting: PropTypes__default["default"].func,
 
   /**
    * A `<Transition>` callback fired immediately after the 'exit' classes
@@ -1133,7 +1135,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement)
    */
-  onExited: undefined
+  onExited: PropTypes__default["default"].func
 }) : {};
 var CSSTransition$1 = CSSTransition;
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -96,22 +97,22 @@ var config = {
   disabled: false
 };
 
-var timeoutsShape = process.env.NODE_ENV !== 'production' ? undefined([undefined, undefined({
-  enter: undefined,
-  exit: undefined,
-  appear: undefined
+var timeoutsShape = process.env.NODE_ENV !== 'production' ? PropTypes.oneOfType([PropTypes.number, PropTypes.shape({
+  enter: PropTypes.number,
+  exit: PropTypes.number,
+  appear: PropTypes.number
 }).isRequired]) : null;
-var classNamesShape = process.env.NODE_ENV !== 'production' ? undefined([undefined, undefined({
-  enter: undefined,
-  exit: undefined,
-  active: undefined
-}), undefined({
-  enter: undefined,
-  enterDone: undefined,
-  enterActive: undefined,
-  exit: undefined,
-  exitDone: undefined,
-  exitActive: undefined
+var classNamesShape = process.env.NODE_ENV !== 'production' ? PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
+  enter: PropTypes.string,
+  exit: PropTypes.string,
+  active: PropTypes.string
+}), PropTypes.shape({
+  enter: PropTypes.string,
+  enterDone: PropTypes.string,
+  enterActive: PropTypes.string,
+  exit: PropTypes.string,
+  exitDone: PropTypes.string,
+  exitActive: PropTypes.string
 })]) : null;
 
 var TransitionGroupContext = React.createContext(null);
@@ -526,10 +527,10 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *     (see
    *     [test/CSSTransition-test.js](https://github.com/reactjs/react-transition-group/blob/13435f897b3ab71f6e19d724f145596f5910581c/test/CSSTransition-test.js#L362-L437)).
    */
-  nodeRef: undefined({
-    current: typeof Element === 'undefined' ? undefined : function (propValue, key, componentName, location, propFullName, secret) {
+  nodeRef: PropTypes.shape({
+    current: typeof Element === 'undefined' ? PropTypes.any : function (propValue, key, componentName, location, propFullName, secret) {
       var value = propValue[key];
-      return undefined(value && 'ownerDocument' in value ? value.ownerDocument.defaultView.Element : Element)(propValue, key, componentName, location, propFullName, secret);
+      return PropTypes.instanceOf(value && 'ownerDocument' in value ? value.ownerDocument.defaultView.Element : Element)(propValue, key, componentName, location, propFullName, secret);
     }
   }),
 
@@ -547,12 +548,12 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    * </Transition>
    * ```
    */
-  children: undefined([undefined, undefined]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.func.isRequired, PropTypes.element.isRequired]).isRequired,
 
   /**
    * Show the component; triggers the enter or exit states
    */
-  in: undefined,
+  in: PropTypes.bool,
 
   /**
    * By default the child component is mounted immediately along with
@@ -560,13 +561,13 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    * first `in={true}` you can set `mountOnEnter`. After the first enter transition the component will stay
    * mounted, even on "exited", unless you also specify `unmountOnExit`.
    */
-  mountOnEnter: undefined,
+  mountOnEnter: PropTypes.bool,
 
   /**
    * By default the child component stays mounted after it reaches the `'exited'` state.
    * Set `unmountOnExit` if you'd prefer to unmount the component after it finishes exiting.
    */
-  unmountOnExit: undefined,
+  unmountOnExit: PropTypes.bool,
 
   /**
    * By default the child component does not perform the enter transition when
@@ -579,17 +580,17 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    * > additional `.appear-*` classes, that way you can choose to style it
    * > differently.
    */
-  appear: undefined,
+  appear: PropTypes.bool,
 
   /**
    * Enable or disable enter transitions.
    */
-  enter: undefined,
+  enter: PropTypes.bool,
 
   /**
    * Enable or disable exit transitions.
    */
-  exit: undefined,
+  exit: PropTypes.bool,
 
   /**
    * The duration of the transition, in milliseconds.
@@ -642,7 +643,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    * }}
    * ```
    */
-  addEndListener: undefined,
+  addEndListener: PropTypes.func,
 
   /**
    * Callback fired before the "entering" status is applied. An extra parameter
@@ -652,7 +653,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement, isAppearing: bool) -> void
    */
-  onEnter: undefined,
+  onEnter: PropTypes.func,
 
   /**
    * Callback fired after the "entering" status is applied. An extra parameter
@@ -662,7 +663,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement, isAppearing: bool)
    */
-  onEntering: undefined,
+  onEntering: PropTypes.func,
 
   /**
    * Callback fired after the "entered" status is applied. An extra parameter
@@ -672,7 +673,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement, isAppearing: bool) -> void
    */
-  onEntered: undefined,
+  onEntered: PropTypes.func,
 
   /**
    * Callback fired before the "exiting" status is applied.
@@ -681,7 +682,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement) -> void
    */
-  onExit: undefined,
+  onExit: PropTypes.func,
 
   /**
    * Callback fired after the "exiting" status is applied.
@@ -690,7 +691,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement) -> void
    */
-  onExiting: undefined,
+  onExiting: PropTypes.func,
 
   /**
    * Callback fired after the "exited" status is applied.
@@ -699,7 +700,7 @@ Transition.propTypes = process.env.NODE_ENV !== "production" ? {
    *
    * @type Function(node: HtmlElement) -> void
    */
-  onExited: undefined
+  onExited: PropTypes.func
 } : {}; // Name the function so it is clearer in the documentation
 
 function noop() {}
@@ -1075,7 +1076,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement, isAppearing: bool)
    */
-  onEnter: undefined,
+  onEnter: PropTypes.func,
 
   /**
    * A `<Transition>` callback fired immediately after the 'enter-active' or
@@ -1085,7 +1086,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement, isAppearing: bool)
    */
-  onEntering: undefined,
+  onEntering: PropTypes.func,
 
   /**
    * A `<Transition>` callback fired immediately after the 'enter' or
@@ -1095,7 +1096,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement, isAppearing: bool)
    */
-  onEntered: undefined,
+  onEntered: PropTypes.func,
 
   /**
    * A `<Transition>` callback fired immediately after the 'exit' class is
@@ -1105,7 +1106,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement)
    */
-  onExit: undefined,
+  onExit: PropTypes.func,
 
   /**
    * A `<Transition>` callback fired immediately after the 'exit-active' is applied.
@@ -1114,7 +1115,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement)
    */
-  onExiting: undefined,
+  onExiting: PropTypes.func,
 
   /**
    * A `<Transition>` callback fired immediately after the 'exit' classes
@@ -1124,7 +1125,7 @@ CSSTransition.propTypes = process.env.NODE_ENV !== "production" ? _extends({}, T
    *
    * @type Function(node: HtmlElement)
    */
-  onExited: undefined
+  onExited: PropTypes.func
 }) : {};
 var CSSTransition$1 = CSSTransition;
 
